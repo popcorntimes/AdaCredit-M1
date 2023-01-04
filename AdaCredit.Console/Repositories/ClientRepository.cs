@@ -28,12 +28,12 @@ namespace AdaCredit
             
             if (Clients.Any(x => x.Document.Equals(client.Document)))
             {
-                System.Console.WriteLine("Cliente já cadastrado");
+                System.Console.WriteLine("This client is already registered!");
                 System.Console.ReadKey();
 
                 return false;
             }
-            //var entity = new Client(client.Name, client.Document, AccountRepository.GetNewUnique());
+            //var entity = new Client(client.Name, client.Document, AccountRepository.GetAccount());
 
             var entity = new Client(client.Name, client.Document);
             Clients.Add(entity);

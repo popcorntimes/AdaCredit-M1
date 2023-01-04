@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdaCredit
 {
-    public class EmployeeRepository
+    public static class EmployeeRepository
     {
         static EmployeeRepository(){
             try
@@ -28,10 +28,12 @@ namespace AdaCredit
 
         public static bool Add(string username, string password)
         {
+            Read();
             Employee? isRegistered = EmployeeRepository.GetByUser(username);
             if (isRegistered != null)
             {
                 System.Console.WriteLine("This employee is already registered!");
+                System.Console.ReadKey();
                 return false;
             }
 
@@ -51,10 +53,19 @@ namespace AdaCredit
 
         }
         
+        public static void UpdateLastLogin(Employee emp)
+        {
+            emp.LastLoginAt = DateTime.Now;
+        }
 
 
         public static Employee? GetByUser(string? username) => Employees.FirstOrDefault(employee => employee.Username == username);
 
+
+        public static void Start()
+        {
+            Read();
+        }
 
         private static void Read()
         {
@@ -93,6 +104,8 @@ namespace AdaCredit
                 System.Console.WriteLine("Inactive user");
                 return false;
             }
+
+            UpdateLastLogin(emp);
 
             System.Console.WriteLine("Successful login");
             return true;

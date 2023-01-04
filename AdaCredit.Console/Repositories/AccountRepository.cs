@@ -8,7 +8,7 @@ using Bogus;
 
 namespace AdaCredit
 {
-    public class AccountRepository
+    public static class AccountRepository
     {
         private static List<Account> Accounts { get; set; } = new List<Account>();
 
@@ -26,13 +26,13 @@ namespace AdaCredit
 
         public static bool Add()
         {
-
+            Read();
             bool isCreated = false;
             string number;
 
             do
             {
-                number = new Faker().Random.ReplaceNumbers("#####-#");
+                number = new Faker().Random.ReplaceNumbers("######");
                 isCreated = IsCreated(number);
             } while(isCreated);
 
@@ -46,19 +46,44 @@ namespace AdaCredit
 
 
         }
+
+        public static Account? GetNewAccount()
+        {
+            Read();
+            bool isCreated = false;
+            string number;
+
+            do
+            {
+                number = new Faker().Random.ReplaceNumbers("######");
+                isCreated = IsCreated(number);
+            } while (isCreated);
+
+            Account acc = new Account(number);
+
+            Accounts.Add(acc);
+
+            Save();
+
+            return acc;
+        }
         
         public static Account? GetByNumber(string number) => Accounts.FirstOrDefault(account => account.Number == number);
 
         public static bool IsCreated(string number) => Accounts.Any(account => account.Number == number);
 
-        private static void Read()
+        public static void Start()
+        {
+            Read();
+        }
+        public static void Read()
         {
             FileManager file = new FileManager("accounts.csv");
             Accounts = file.CsvReader<Account>();
 
         }
 
-        private static void Save()
+        public static void Save()
         {
             FileManager file = new FileManager("accounts.csv");
 

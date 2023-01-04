@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdaCredit
 {
-    public class ClientRepository
+    public static class ClientRepository
     {
         private static List<Client> Clients { get; set; } = new List<Client>();
 
@@ -23,35 +23,49 @@ namespace AdaCredit
             }
         }
 
-        public bool Add(Client client)
+        public static void Start()
         {
-            
-            if (Clients.Any(x => x.Document.Equals(client.Document)))
+            Read();
+        }
+
+        public static bool Add(string name, string document)
+        {
+            if (Clients.Any(x => x.Document.Equals(document)))
             {
                 System.Console.WriteLine("This client is already registered!");
                 System.Console.ReadKey();
 
                 return false;
             }
-            //var entity = new Client(client.Name, client.Document, AccountRepository.GetAccount());
+            var entity = new Client(name, document, AccountRepository.GetNewAccount());
 
-            var entity = new Client(client.Name, client.Document);
+            //var entity = new Client(client.Name, client.Document);
             Clients.Add(entity);
-
             Save();
 
             return true;
         }
 
+        public static Client? GetByDoc(string? document) => Clients.FirstOrDefault(client => client.Document == document);
 
-        private static void Read()
+        public static void Print(Client client)
+        {
+            System.Console.WriteLine("Name: ", client.Name);
+            System.Console.WriteLine("Document: ", client.Document);
+            System.Console.WriteLine("Account number: ", client.Account.Number);
+            System.Console.WriteLine("Account branch: ", client.Account.Branch);
+            System.Console.WriteLine("Account balance: ", client.Account.Balance);
+        }
+
+
+        public static void Read()
         {
             FileManager file = new FileManager("clients.csv");
             Clients = file.CsvReader<Client>();
 
         }
 
-        private static void Save()
+        public static void Save()
         {
             FileManager file = new FileManager("clients.csv");
 

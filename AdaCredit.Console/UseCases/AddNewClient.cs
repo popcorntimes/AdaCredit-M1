@@ -10,24 +10,32 @@ namespace AdaCredit
     {
         public static void Execute()
         {
-            System.Console.WriteLine("Digite o Nome:");
+            System.Console.WriteLine("Enter name:");
             var name = System.Console.ReadLine();
 
-            System.Console.WriteLine("Digite o CPF (sem formatação):");
-            var document = long.Parse(System.Console.ReadLine());
+            System.Console.WriteLine("Enter CPF (only numbers):");
+            var document = System.Console.ReadLine();
 
-            var client = new Client(name, document);
+            if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(document))
+            {
+                System.Console.WriteLine("Fields must not be empty, press any key to continue");
+                System.Console.ReadKey();
+                return;
+            }
 
-            var repository = new ClientRepository();
+            //var client = new Client(name, document);
+
+            //var repository = new ClientRepository();
             
-            var result = repository.Add(client);
+            var result = ClientRepository.Add(name, document);
 
             if (result)
-                System.Console.WriteLine("Cliente cadastrado com sucesso!");
+                System.Console.WriteLine("Client registered");
             else
-                System.Console.WriteLine("Falha ao cadastrar novo cliente!");
+                System.Console.WriteLine("Register failed");
 
             System.Console.ReadKey();
+
         }
     }
 }

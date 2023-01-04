@@ -7,15 +7,10 @@ using AdaCredit;
 
 namespace AdaCredit
 {
-    public class Login
+    public static class Login
     {
-        private readonly EmployeeRepository _employeeRepository;
 
-        public Login(EmployeeRepository _employeeRepository)
-        {
-            this._employeeRepository = _employeeRepository;
-        }
-        public void Show()
+        public static void Show()
         {
             var isFirstAccess = false;
             var loggedIn = false;

@@ -11,15 +11,10 @@ namespace AdaCredit
     {
         static void Main(string[] args)
         {
-            /*System.Console.WriteLine("Hello, World!");
-            var employeeRepository = new EmployeeRepository();
-            var loginScreen = new Login(employeeRepository);
-            loginScreen.Show();
-
-            Menu.Show();*/
-            AccountRepository.Add();
-
-            
+            ClientRepository.Start();
+            EmployeeRepository.Start();
+            Login.Show();
+            Menu.Show();
 
         }
     }

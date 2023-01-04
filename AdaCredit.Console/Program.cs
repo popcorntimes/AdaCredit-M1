@@ -15,6 +15,8 @@ namespace AdaCredit
             var employeeRepository = new EmployeeRepository();
             var loginScreen = new Login(employeeRepository);
             loginScreen.Show();
+
+            Menu.Show();
             
         }
     }

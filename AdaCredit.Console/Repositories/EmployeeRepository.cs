@@ -10,12 +10,24 @@ namespace AdaCredit
 {
     public class EmployeeRepository
     {
+        static EmployeeRepository(){
+            try
+            {
+                // Faz a leitura do arquivo e joga na Employees
+                Read();
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e);
+            }
+            
+
+        }
         private static List<Employee> Employees { get; set; } = new List<Employee>();
 
 
         public static bool Add(string username, string password)
         {
-            Read();
             Employee? isRegistered = EmployeeRepository.GetByUser(username);
             if (isRegistered != null)
             {

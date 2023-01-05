@@ -16,6 +16,7 @@ namespace AdaCredit
             Login.Show();
             Menu.Show();
 
+
         }
     }
 }

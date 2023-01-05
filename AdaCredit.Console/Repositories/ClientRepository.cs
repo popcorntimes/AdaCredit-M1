@@ -1,4 +1,5 @@
 ﻿using AdaCredit.Console;
+using Bogus;
 using Bogus.DataSets;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,19 @@ namespace AdaCredit
         public static void Start()
         {
             Read();
+        }
+
+        public static void Generate(int qt)
+        {
+            string name;
+            string document;
+            for(int i = 0; i < qt; i++)
+            {
+                name = new Faker("pt_BR").Name.FullName();
+                document = new Faker().Random.ReplaceNumbers("###########");
+                Add(name, document);
+            }
+
         }
 
         public static bool Add(string name, string document)

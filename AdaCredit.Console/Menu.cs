@@ -34,7 +34,6 @@ namespace AdaCredit
                 .Add("Show employee info", GetEmployee.Execute)
                 .Add("Deactivate employee", DeactivateEmployee.Execute)
                 .Add("Change employee password", EditEmployeePassword.Execute)
-                .Add("Show all active employees and their last login date", ShowActiveEmployees.Execute)
                 .Add("Back", ConsoleMenu.Close)
                 .Configure(config =>
                 {

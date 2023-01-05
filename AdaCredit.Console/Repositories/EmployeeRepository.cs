@@ -66,7 +66,7 @@ namespace AdaCredit
 
         public static void PrintAllActives()
         {
-            List<Employee> emps = AllActives();
+            List<Employee>? emps = AllActives();
 
             if (emps.Count != 0)
             {
@@ -175,8 +175,9 @@ namespace AdaCredit
 
             }
 
+
         }
-        
+
         public static void EditPassword(Employee emp)
         {
             string password;
@@ -200,25 +201,16 @@ namespace AdaCredit
 
         public static void Print(Employee emp)
         {
-            string status;
             System.Console.WriteLine($"Employee username: {emp.Username}");
             if (emp.LastLoginAt == null)
             {
-                System.Console.WriteLine($"Last login at: never\r\n");
+                System.Console.WriteLine($"Last login at: never");
             }
             else
             {
-                System.Console.WriteLine($"Last login at: {emp.LastLoginAt}\r\n");
+                System.Console.WriteLine($"Last login at: {emp.LastLoginAt}");
+                return;
             }
-            if (emp.Inactive.Equals("x"))
-            {
-                status = "Inactive";
-            }
-            else
-            {
-                status = "Active";
-            }
-            System.Console.WriteLine($"Status: {status}");
 
 
         }

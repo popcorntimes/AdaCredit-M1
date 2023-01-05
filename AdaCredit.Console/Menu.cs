@@ -31,7 +31,6 @@ namespace AdaCredit
 
             var subEmployee = new ConsoleMenu(Array.Empty<string>(), level: 1)
                 .Add("Add new employee", AddNewEmployee.Execute)
-                .Add("Show employee info", GetEmployee.Execute)
                 .Add("Deactivate employee", DeactivateEmployee.Execute)
                 .Add("Change employee password", EditEmployeePassword.Execute)
                 .Add("Back", ConsoleMenu.Close)

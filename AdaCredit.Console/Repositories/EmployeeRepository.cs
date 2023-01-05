@@ -8,8 +8,21 @@ using System.Threading.Tasks;
 
 namespace AdaCredit
 {
-    public class EmployeeRepository
+    public static class EmployeeRepository
     {
+        static EmployeeRepository(){
+            try
+            {
+                // Faz a leitura do arquivo e joga na Employees
+                Read();
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e);
+            }
+            
+
+        }
         private static List<Employee> Employees { get; set; } = new List<Employee>();
 
 
@@ -20,6 +33,7 @@ namespace AdaCredit
             if (isRegistered != null)
             {
                 System.Console.WriteLine("This employee is already registered!");
+                System.Console.ReadKey();
                 return false;
             }
 
@@ -39,10 +53,51 @@ namespace AdaCredit
 
         }
         
+        public static void LastLogin(Employee emp)
+        {
+            emp.LastLoginAt = DateTime.Now;
+            Save();
+        }
 
 
         public static Employee? GetByUser(string? username) => Employees.FirstOrDefault(employee => employee.Username == username);
 
+        public static List<Employee> AllActives() => Employees.Where(emp => !emp.Inactive.Equals("x")).ToList();
+
+        public static void PrintAllActives()
+        {
+            List<Employee>? emps = AllActives();
+
+            if (emps.Count != 0)
+            {
+                foreach (Employee emp in emps)
+                {
+                    System.Console.WriteLine($"Employee username: {emp.Username}");
+                    if (emp.LastLoginAt == null)
+                    {
+                        System.Console.WriteLine($"Last login at: never\r\n");
+                    }
+                    else
+                    {
+                        System.Console.WriteLine($"Last login at: {emp.LastLoginAt}\r\n");
+                    }
+
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("No active employee");
+            }
+
+
+
+
+        }
+
+        public static void Start()
+        {
+            Read();
+        }
 
         private static void Read()
         {
@@ -58,11 +113,10 @@ namespace AdaCredit
             file.CsvWriter(Employees);
         }
 
-        public static int IsActive(Employee employee) => employee.IsActive;
+        public static string IsActive(Employee emp) => emp.Inactive;
 
         public static bool TryLogin(string username, string password)
         {
-            Read();
             Employee? emp = GetByUser(username);
             if(emp == null)
             {
@@ -76,14 +130,94 @@ namespace AdaCredit
                 return false;
             }
 
-            if (IsActive(emp) == 0)
+            if (IsActive(emp) == "x")
             {
                 System.Console.WriteLine("Inactive user");
                 return false;
             }
 
+            LastLogin(emp);
+
             System.Console.WriteLine("Successful login");
             return true;
+        }
+
+        public static void FirstAccess()
+        {
+            System.Console.WriteLine("Enter username:");
+            var username = System.Console.ReadLine();
+
+            System.Console.WriteLine("Enter password:");
+            var password = System.Console.ReadLine();
+
+
+            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+            {
+                System.Console.WriteLine("Fields must not be empty");
+                System.Console.ReadKey();
+                return;
+            }
+
+            //var client = new Client(username, password);
+
+            //var repository = new EmployeeRepository();
+
+            var result = Add(username, password);
+
+            if (result)
+            {
+                System.Console.WriteLine("Employee registered");
+                System.Console.WriteLine("Use your credentials to log in");
+            }
+            else
+            {
+                System.Console.WriteLine("Register failed");
+
+            }
+
+
+        }
+
+        public static void EditPassword(Employee emp)
+        {
+            string password;
+            System.Console.Write("Enter new password: ");
+            password = System.Console.ReadLine();
+            if (string.IsNullOrEmpty(password))
+            {
+                System.Console.WriteLine("Password should not be empty");
+                System.Console.ReadKey();
+                System.Console.Clear();
+                return;
+            }
+
+            string salt = Password.SaltGeneration();
+            string strPassword = Password.HashGeneration(password, salt);
+
+            emp.ChangePassword(strPassword, salt);
+            Save();
+            System.Console.WriteLine("Password updated");
+        }
+
+        public static void Print(Employee emp)
+        {
+            System.Console.WriteLine($"Employee username: {emp.Username}");
+            if (emp.LastLoginAt == null)
+            {
+                System.Console.WriteLine($"Last login at: never");
+            }
+            else
+            {
+                System.Console.WriteLine($"Last login at: {emp.LastLoginAt}");
+                return;
+            }
+
+
+        }
+        public static void Deactivate(Employee emp)
+        {
+            emp.Inactive = "x";
+            Save();
         }
 
     }

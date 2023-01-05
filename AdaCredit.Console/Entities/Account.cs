@@ -10,25 +10,32 @@ namespace AdaCredit
     public sealed class Account
     {
         private readonly string DEFAULT_BRANCH_NUMBER = "0001";
-        public string Number { get; private set; }
-        public string Branch { get; private set; }
+        public string Number { get; set; }
+        public string Branch { get; set; }
 
-        public decimal Balance { get; private set; }
+        public decimal Balance { get; set; }
 
-        public bool IsActive { get; private set; }
+        //public int IsAActive { get; set; }
 
         public Account()
         {
-            this.Number = new Faker().Random.ReplaceNumbers("#####-#");
+            this.Number = new Faker().Random.ReplaceNumbers("######");
             this.Branch = this.DEFAULT_BRANCH_NUMBER;
-            this.Balance = 0;
+            this.Balance = 0.0m;
+            //this.IsAActive = 1;
+
+
+
         }
 
         public Account(string accountNumber)
         {
             this.Number = accountNumber;
             this.Branch = this.DEFAULT_BRANCH_NUMBER;
-            this.Balance = 0;
+            this.Balance = 0.0m;
+            //this.IsAActive = 1;
+
+
         }
     }
 }

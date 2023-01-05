@@ -13,15 +13,15 @@ namespace AdaCredit
         public string Password { get; private set; }
         public string Salt { get; private set; }
         public DateTime? LastLoginAt { get; set; }
-        public int IsActive { get; set; }
+        public string Inactive { get; set; }
 
-        public Employee(string Username, string Password, string Salt, DateTime? LastLoginAt = null,int IsActive = 1)
+        public Employee(string Username, string Password, string Salt, DateTime? LastLoginAt = null, string Inactive = null)
         {
             this.Username = Username;
             this.Password = Password;
             this.Salt = Salt;
             this.LastLoginAt = LastLoginAt;
-            this.IsActive = IsActive;
+            this.Inactive = Inactive;
 
         }
 

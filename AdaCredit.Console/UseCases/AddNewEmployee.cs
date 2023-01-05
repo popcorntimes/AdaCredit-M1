@@ -21,7 +21,7 @@ namespace AdaCredit
 
             if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
-                System.Console.WriteLine("Fields must not be empty, press any key to continue");
+                System.Console.WriteLine("Fields must not be empty");
                 System.Console.ReadKey();
                 return;
             }

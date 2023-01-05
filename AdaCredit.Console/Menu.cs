@@ -13,16 +13,16 @@ namespace AdaCredit
         public static void Show()
         {
             var subClient = new ConsoleMenu(Array.Empty<string>(), level: 1)
-                .Add("Cadastrar um Novo Cliente", AddNewClient.Execute)
-                .Add("Consultar Dados de um Cliente", GetClient.Execute)
-                .Add("Alterar Cadastro de um Cliente", () => SomeAction("Sub_Three"))
-                .Add("Desativar Cadastro de um Cliente", DeactivateClient.Execute)
-                .Add("Voltar", ConsoleMenu.Close)
+                .Add("Add new client", AddNewClient.Execute)
+                .Add("Show client info", GetClient.Execute)
+                .Add("Edit client info", EditClient.Execute)
+                .Add("Deactivate client", DeactivateClient.Execute)
+                .Add("Back", ConsoleMenu.Close)
                 .Configure(config =>
                 {
                     config.Selector = "--> ";
                     config.EnableFilter = false;
-                    config.Title = "Clientes";
+                    config.Title = "Clients";
                     config.EnableBreadcrumb = true;
                     config.WriteBreadcrumbAction = titles => System.Console.WriteLine(string.Join(" / ", titles));
                     config.SelectedItemForegroundColor = ConsoleColor.Black;
@@ -30,16 +30,33 @@ namespace AdaCredit
                 });
 
             var subEmployee = new ConsoleMenu(Array.Empty<string>(), level: 1)
-                .Add("Cadastrar um Novo Funcionário", AddNewEmployee.Execute)
-                .Add("Consultar Dados de um Funcionário", GetEmployee.Execute)
-                .Add("Desativar o Cadastro de um Funcionário", DeactivateEmployee.Execute)
-                .Add("Alterar Senha de um Funcionário", () => SomeAction("Sub_Four"))
-                .Add("Voltar", ConsoleMenu.Close)
+                .Add("Add new employee", AddNewEmployee.Execute)
+                .Add("Show employee info", GetEmployee.Execute)
+                .Add("Deactivate employee", DeactivateEmployee.Execute)
+                .Add("Change employee password", EditEmployeePassword.Execute)
+                .Add("Show all active employees and their last login date", ShowActiveEmployees.Execute)
+                .Add("Back", ConsoleMenu.Close)
                 .Configure(config =>
                 {
                     config.Selector = "--> ";
                     config.EnableFilter = false;
-                    config.Title = "Funcionários";
+                    config.Title = "Employees";
+                    config.EnableBreadcrumb = true;
+                    config.WriteBreadcrumbAction = titles => System.Console.WriteLine(string.Join(" / ", titles));
+                    config.SelectedItemForegroundColor = ConsoleColor.Black;
+                    config.SelectedItemBackgroundColor = ConsoleColor.White;
+                });
+
+            var subReport = new ConsoleMenu(Array.Empty<string>(), level: 1)
+                .Add("Show all active clients and their balances", ShowActiveClients.Execute)
+                .Add("Show all inactive clients", ShowInactiveClients.Execute)
+                .Add("Show all active employees and their last login date", ShowActiveEmployees.Execute)
+                .Add("Back", ConsoleMenu.Close)
+                .Configure(config =>
+                {
+                    config.Selector = "--> ";
+                    config.EnableFilter = false;
+                    config.Title = "Reports";
                     config.EnableBreadcrumb = true;
                     config.WriteBreadcrumbAction = titles => System.Console.WriteLine(string.Join(" / ", titles));
                     config.SelectedItemForegroundColor = ConsoleColor.Black;
@@ -47,9 +64,10 @@ namespace AdaCredit
                 });
 
             var menu = new ConsoleMenu(Array.Empty<string>(), level: 0)
-                .Add("Clientes", subClient.Show)
-                .Add("Funcionários", subEmployee.Show)
-                .Add("Sair", () => Environment.Exit(0))
+                .Add("Clients", subClient.Show)
+                .Add("Employees", subEmployee.Show)
+                .Add("Reports", subReport.Show)
+                .Add("Exit", () => Environment.Exit(0))
                 .Configure(config =>
                 {
                     config.Selector = "--> ";

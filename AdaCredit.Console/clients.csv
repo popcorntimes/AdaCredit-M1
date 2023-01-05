@@ -1,5 +1,5 @@
-Name,Document,Number,Branch,Balance,IsActive,IsActive
-Dayanne,123,084916,0001,0.0,1,0
-Dayanne,1234,587747,0001,0.0,1,1
-Dayanne,12345678,686124,0001,0.0,1,1
-Vanessa,12323543463546,075303,0001,0.0,1,1
+Name,Document,Number,Branch,Balance,Inactive
+Dayanne,12345678910,992732,0001,0.0,
+Cristina,12345678911,497777,0001,0.0,x
+Pereira,12345678912,683539,0001,0.0,
+Gomes,12345678914,773680,0001,0.0,

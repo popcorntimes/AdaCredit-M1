@@ -34,7 +34,7 @@ namespace AdaCredit {
             else
             {
 
-                ClientRepository.Show(result);
+                ClientRepository.Print(result);
 
             }
 

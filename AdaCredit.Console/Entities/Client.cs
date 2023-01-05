@@ -14,22 +14,22 @@ namespace AdaCredit
         public string Document { get; set; }
         public Account Account { get; set; } = null;
 
-        public int IsActive { get; set; }
+        public string Inactive { get; set; }
 
-        public Client(string Name, string Document)
+        public Client(string Name, string Document, string Inactive = null)
         {
             this.Name = Name;
             this.Document = Document;
             this.Account = null;
-            this.IsActive = 1;
+            this.Inactive = Inactive;
         }
 
-        public Client(string Name, string Document, Account Account)
+        public Client(string Name, string Document, Account Account, string Inactive = null)
         {
             this.Name = Name;
             this.Document = Document;
             this.Account = Account;
-            this.IsActive = 1;
+            this.Inactive = Inactive;
         }
     }
 }

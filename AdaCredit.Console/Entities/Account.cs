@@ -15,14 +15,14 @@ namespace AdaCredit
 
         public decimal Balance { get; set; }
 
-        public int IsActive { get; set; }
+        //public int IsAActive { get; set; }
 
         public Account()
         {
             this.Number = new Faker().Random.ReplaceNumbers("######");
             this.Branch = this.DEFAULT_BRANCH_NUMBER;
             this.Balance = 0.0m;
-            this.IsActive = 1;
+            //this.IsAActive = 1;
 
 
 
@@ -33,7 +33,7 @@ namespace AdaCredit
             this.Number = accountNumber;
             this.Branch = this.DEFAULT_BRANCH_NUMBER;
             this.Balance = 0.0m;
-            this.IsActive = 1;
+            //this.IsAActive = 1;
 
 
         }

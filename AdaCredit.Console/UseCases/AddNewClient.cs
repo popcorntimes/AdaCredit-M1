@@ -18,7 +18,14 @@ namespace AdaCredit
 
             if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(document))
             {
-                System.Console.WriteLine("Fields must not be empty, press any key to continue");
+                System.Console.WriteLine("Fields must not be empty");
+                System.Console.ReadKey();
+                return;
+            }
+
+            if(document.Length != 11)
+            {
+                System.Console.WriteLine("CPF must have 11 digits");
                 System.Console.ReadKey();
                 return;
             }

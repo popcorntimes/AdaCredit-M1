@@ -15,7 +15,6 @@ namespace AdaCredit
             EmployeeRepository.Start();
             Login.Show();
             Menu.Show();
-            
 
         }
     }

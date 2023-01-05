@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace AdaCredit.Console.UseCases
+namespace AdaCredit
 {
     internal class GetEmployee
     {
@@ -34,7 +34,7 @@ namespace AdaCredit.Console.UseCases
             else
             {
 
-                EmployeeRepository.Show(result);
+                EmployeeRepository.Print(result);
 
             }
 

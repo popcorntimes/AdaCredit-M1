@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdaCredit
 {
-    internal class DeactivateEmployee
+    internal class EditEmployeePassword
     {
         public static void Execute()
         {
@@ -15,7 +15,7 @@ namespace AdaCredit
 
             if (String.IsNullOrEmpty(username))
             {
-                System.Console.WriteLine("Field must not be empty");
+                System.Console.WriteLine("Field must not be empty, try again");
                 System.Console.ReadKey();
                 return;
             }
@@ -23,25 +23,21 @@ namespace AdaCredit
 
             if (result == null)
             {
-                System.Console.WriteLine("Client not available in the database");
+                System.Console.WriteLine("Employee not available in the database");
                 System.Console.ReadKey();
                 return;
 
             }
-            if (EmployeeRepository.IsActive(result) == "x")
+            else
             {
-                System.Console.WriteLine("Employee already deactivated");
-                System.Console.ReadKey();
-                return;
+
+                EmployeeRepository.EditPassword(result);
 
             }
-
-            EmployeeRepository.Deactivate(result);
-            System.Console.WriteLine("Employee deactivated");
 
 
             System.Console.ReadKey();
-        }
 
+        }
     }
 }

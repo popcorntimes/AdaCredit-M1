@@ -33,12 +33,9 @@ namespace AdaCredit
                 if (isFirstAccess)
                 {
                     System.Console.WriteLine("First access detected");
-                    System.Console.Write("Enter the new username: ");
-                    username = System.Console.ReadLine();
-                    System.Console.Write("Enter the new password: ");
-                    password = System.Console.ReadLine();
-                    loggedIn = EmployeeRepository.Add(username, password);
-                   
+                    EmployeeRepository.FirstAccess();
+
+
                 } else
                 {
                     loggedIn = EmployeeRepository.TryLogin(username, password);

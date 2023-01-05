@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdaCredit.Console.UseCases
+namespace AdaCredit
 {
-    internal class DeactivateClient
+    internal class EditClient
     {
         public static void Execute()
         {
@@ -20,7 +20,7 @@ namespace AdaCredit.Console.UseCases
                 System.Console.ReadKey();
                 return;
             }
-            ClientRepository.Read();
+
             Client? result = ClientRepository.GetByDoc(document);
 
             if (result == null)
@@ -30,18 +30,12 @@ namespace AdaCredit.Console.UseCases
                 return;
 
             }
-            if (ClientRepository.IsActive(result) == "x")
+            else
             {
-                System.Console.WriteLine("Client already deactivated");
-                System.Console.ReadKey();
-                return;
+
+                ClientRepository.Edit(result);
 
             }
-
-
-            ClientRepository.Deactivate(result);
-            System.Console.WriteLine("Client deactivated");
-
 
 
             System.Console.ReadKey();

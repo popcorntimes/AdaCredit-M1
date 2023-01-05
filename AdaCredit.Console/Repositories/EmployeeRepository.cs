@@ -53,9 +53,10 @@ namespace AdaCredit
 
         }
         
-        public static void UpdateLastLogin(Employee emp)
+        public static void LastLogin(Employee emp)
         {
             emp.LastLoginAt = DateTime.Now;
+            Save();
         }
 
 
@@ -85,7 +86,6 @@ namespace AdaCredit
 
         public static bool TryLogin(string username, string password)
         {
-            Read();
             Employee? emp = GetByUser(username);
             if(emp == null)
             {
@@ -105,10 +105,23 @@ namespace AdaCredit
                 return false;
             }
 
-            UpdateLastLogin(emp);
+            LastLogin(emp);
 
             System.Console.WriteLine("Successful login");
             return true;
+        }
+
+        public static void Show(Employee emp)
+        {
+            System.Console.WriteLine(emp.Username);
+            System.Console.WriteLine(emp.LastLoginAt);
+
+
+        }
+        public static void Deactivate(Employee emp)
+        {
+            emp.IsActive = 0;
+            Save();
         }
 
     }

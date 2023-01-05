@@ -10,11 +10,11 @@ namespace AdaCredit
 
     public sealed class Client
     {
-        public string Name { get; private set; }
-        public string Document { get; private set; }
-        public Account Account { get; private set; } = null;
+        public string Name { get; set; }
+        public string Document { get; set; }
+        public Account Account { get; set; } = null;
 
-        public int IsActive { get; private set; }
+        public int IsActive { get; set; }
 
         public Client(string Name, string Document)
         {

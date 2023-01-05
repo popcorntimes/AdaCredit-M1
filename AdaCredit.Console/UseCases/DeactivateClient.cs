@@ -1,13 +1,12 @@
-﻿using Bogus.DataSets;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
-namespace AdaCredit {
-    internal class GetClient
+namespace AdaCredit.Console.UseCases
+{
+    internal class DeactivateClient
     {
         public static void Execute()
         {
@@ -21,7 +20,7 @@ namespace AdaCredit {
                 System.Console.ReadKey();
                 return;
             }
-
+            ClientRepository.Read();
             Client? result = ClientRepository.GetByDoc(document);
 
             if (result == null)
@@ -31,12 +30,18 @@ namespace AdaCredit {
                 return;
 
             }
-            else
+            if (ClientRepository.IsActive(result) == 0)
             {
-
-                ClientRepository.Show(result);
+                System.Console.WriteLine("Client already deactivated");
+                System.Console.ReadKey();
+                return;
 
             }
+
+
+            ClientRepository.Deactivate(result);
+            System.Console.WriteLine("Client deactivated");
+
 
 
             System.Console.ReadKey();

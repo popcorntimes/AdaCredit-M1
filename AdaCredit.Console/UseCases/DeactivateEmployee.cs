@@ -1,15 +1,12 @@
-﻿using AdaCredit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace AdaCredit.Console.UseCases
 {
-    internal class GetEmployee
+    internal class DeactivateEmployee
     {
         public static void Execute()
         {
@@ -26,21 +23,25 @@ namespace AdaCredit.Console.UseCases
 
             if (result == null)
             {
-                System.Console.WriteLine("Employee not available in the database");
+                System.Console.WriteLine("Client not available in the database");
                 System.Console.ReadKey();
                 return;
 
             }
-            else
+            if (EmployeeRepository.IsActive(result) == 0)
             {
-
-                EmployeeRepository.Show(result);
+                System.Console.WriteLine("Employee already deactivated");
+                System.Console.ReadKey();
+                return;
 
             }
 
+            EmployeeRepository.Deactivate(result);
+            System.Console.WriteLine("Employee deactivated");
+
 
             System.Console.ReadKey();
-
         }
+
     }
 }

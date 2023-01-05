@@ -48,15 +48,23 @@ namespace AdaCredit
 
         public static Client? GetByDoc(string? document) => Clients.FirstOrDefault(client => client.Document == document);
 
-        public static void Print(Client client)
+        public static void Show(Client client)
         {
-            System.Console.WriteLine("Name: ", client.Name);
-            System.Console.WriteLine("Document: ", client.Document);
-            System.Console.WriteLine("Account number: ", client.Account.Number);
-            System.Console.WriteLine("Account branch: ", client.Account.Branch);
-            System.Console.WriteLine("Account balance: ", client.Account.Balance);
+            System.Console.WriteLine(client.Name);
+            System.Console.WriteLine(client.Document);
+            System.Console.WriteLine(client.Account.Number);
+            System.Console.WriteLine(client.Account.Branch);
+            System.Console.WriteLine(client.Account.Balance);
         }
 
+        public static int IsActive(Client client) => client.IsActive;
+
+
+        public static void Deactivate(Client client)
+        {
+            client.IsActive = 0;
+            Save();
+        }
 
         public static void Read()
         {

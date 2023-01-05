@@ -16,7 +16,7 @@ namespace AdaCredit
                 .Add("Cadastrar um Novo Cliente", AddNewClient.Execute)
                 .Add("Consultar Dados de um Cliente", GetClient.Execute)
                 .Add("Alterar Cadastro de um Cliente", () => SomeAction("Sub_Three"))
-                .Add("Desativar Cadastro de um Cliente", () => SomeAction("Sub_Four"))
+                .Add("Desativar Cadastro de um Cliente", DeactivateClient.Execute)
                 .Add("Voltar", ConsoleMenu.Close)
                 .Configure(config =>
                 {
@@ -31,8 +31,9 @@ namespace AdaCredit
 
             var subEmployee = new ConsoleMenu(Array.Empty<string>(), level: 1)
                 .Add("Cadastrar um Novo Funcionário", AddNewEmployee.Execute)
-                .Add("Alterar Senha de um Funcionário", () => SomeAction("Sub_Two"))
-                .Add("Desativar o Cadastro de um Funcionário", () => SomeAction("Sub_Three"))
+                .Add("Consultar Dados de um Funcionário", GetEmployee.Execute)
+                .Add("Desativar o Cadastro de um Funcionário", DeactivateEmployee.Execute)
+                .Add("Alterar Senha de um Funcionário", () => SomeAction("Sub_Four"))
                 .Add("Voltar", ConsoleMenu.Close)
                 .Configure(config =>
                 {

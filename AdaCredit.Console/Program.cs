@@ -11,6 +11,7 @@ namespace AdaCredit
     {
         static void Main(string[] args)
         {
+            //ClientRepository.Generate(100);
             ClientRepository.Start();
             EmployeeRepository.Start();
             Login.Show();

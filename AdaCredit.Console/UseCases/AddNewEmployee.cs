@@ -26,10 +26,6 @@ namespace AdaCredit
                 return;
             }
 
-            //var client = new Client(username, password);
-
-            //var repository = new EmployeeRepository();
-
             var result = EmployeeRepository.Add(username, password);
 
             if (result)

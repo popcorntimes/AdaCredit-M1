@@ -65,6 +65,12 @@ namespace AdaCredit
 
         public static Client? GetByDoc(string? document) => Clients.FirstOrDefault(client => client.Document == document);
         
+        public static Client? GetByAccount(string number, string branch, string bankcode) => Clients.FirstOrDefault
+            (client => client.Account.BankCode == bankcode && client.Account.Branch == branch && client.Account.Number == number);
+
+        public static Client? GetExistingActive(string number, string branch, string bankcode) => Clients.FirstOrDefault
+            (client => client.Account.BankCode == bankcode && client.Account.Branch == branch && client.Account.Number == number && !client.Inactive.Equals("x"));
+
         public static string MaskNumber (string number)
         {
             string mask;

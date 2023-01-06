@@ -30,10 +30,6 @@ namespace AdaCredit
                 return;
             }
 
-            //var client = new Client(name, document);
-
-            //var repository = new ClientRepository();
-            
             var result = ClientRepository.Add(name, document);
 
             if (result)

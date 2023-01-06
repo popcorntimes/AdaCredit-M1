@@ -49,6 +49,7 @@ namespace AdaCredit
                 .Add("Show all active clients and their balances", ShowActiveClients.Execute)
                 .Add("Show all inactive clients", ShowInactiveClients.Execute)
                 .Add("Show all active employees and their last login date", ShowActiveEmployees.Execute)
+                .Add("Show failed transactions", ShowFailedTransactions.Execute)
                 .Add("Back", ConsoleMenu.Close)
                 .Configure(config =>
                 {
@@ -61,9 +62,28 @@ namespace AdaCredit
                     config.SelectedItemBackgroundColor = ConsoleColor.White;
                 });
 
+            var subTransaction = new ConsoleMenu(Array.Empty<string>(), level: 1)
+                .Add("Process transactions", StartProcessing.Execute)
+                .Add("Back", ConsoleMenu.Close)
+                .Configure(config =>
+                {
+                    config.Selector = "--> ";
+                    config.EnableFilter = false;
+                    config.Title = "Transactions";
+                    config.EnableBreadcrumb = true;
+                    config.WriteBreadcrumbAction = titles => System.Console.WriteLine(string.Join(" / ", titles));
+                    config.SelectedItemForegroundColor = ConsoleColor.Black;
+                    config.SelectedItemBackgroundColor = ConsoleColor.White;
+                });
+
+
+
+
+
             var menu = new ConsoleMenu(Array.Empty<string>(), level: 0)
                 .Add("Clients", subClient.Show)
                 .Add("Employees", subEmployee.Show)
+                .Add("Transactions", subTransaction.Show)
                 .Add("Reports", subReport.Show)
                 .Add("Exit", () => Environment.Exit(0))
                 .Configure(config =>

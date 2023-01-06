@@ -70,6 +70,8 @@ namespace AdaCredit
         
         public static Account? GetByNumber(string number) => Accounts.FirstOrDefault(account => account.Number == number);
 
+        //public static Account? Get(string )
+
         public static bool IsCreated(string number) => Accounts.Any(account => account.Number == number);
 
         public static void Start()

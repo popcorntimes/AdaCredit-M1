@@ -65,6 +65,7 @@ namespace AdaCredit
 
         public static Client? GetByDoc(string? document) => Clients.FirstOrDefault(client => client.Document == document);
         
+       
         public static Client? GetByAccount(string number, string branch, string bankcode) => Clients.FirstOrDefault
             (client => client.Account.BankCode == bankcode && client.Account.Branch == branch && client.Account.Number == number);
 
@@ -102,6 +103,34 @@ namespace AdaCredit
             System.Console.WriteLine("Name updated");
 
         }
+
+        public static bool AddFunds(Client client, decimal value)
+        {
+            if (client == null)
+            {
+                return false;
+            }
+            client.Account.Balance = client.Account.Balance + value;
+            AccountRepository.AddFunds(client.Account, value);
+            Save();
+
+            return true;
+        }
+
+        public static bool SubtractFunds(Client client, decimal value)
+        {
+            if (client == null)
+            {
+                return false;
+            }
+            client.Account.Balance = client.Account.Balance - value;
+            AccountRepository.SubtractFunds(client.Account, value);
+
+            return true;
+        }
+
+        
+
         public static void EditDocument(Client client)
         {
             string document;

@@ -70,7 +70,29 @@ namespace AdaCredit
         
         public static Account? GetByNumber(string number) => Accounts.FirstOrDefault(account => account.Number == number);
 
-        //public static Account? Get(string )
+        public static bool AddFunds(Account acc, decimal value)
+        {
+            if (acc == null)
+            {
+                return false;
+            }
+            acc.Balance = acc.Balance + value;
+            Save();
+
+            return true;
+        }
+
+        public static bool SubtractFunds(Account acc, decimal value)
+        {
+            if (acc == null)
+            {
+                return false;
+            }
+            acc.Balance = acc.Balance - value;
+            Save();
+
+            return true;
+        }
 
         public static bool IsCreated(string number) => Accounts.Any(account => account.Number == number);
 

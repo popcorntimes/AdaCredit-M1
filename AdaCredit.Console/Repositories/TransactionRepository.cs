@@ -134,7 +134,17 @@ namespace AdaCredit
                     }
                 }
 
-                System.Console.WriteLine("Another validation TBA");
+
+                System.Console.WriteLine($"Target current balance: R${TargetClient.Account.Balance}");
+                System.Console.WriteLine($"Origin current balance: R${OriginClient.Account.Balance}");
+
+                ClientRepository.AddFunds(TargetClient, t.Value + tax);
+                ClientRepository.SubtractFunds(OriginClient, t.Value + tax);
+
+                System.Console.WriteLine($"Target new balance: R${TargetClient.Account.Balance}");
+                System.Console.WriteLine($"Origin new balance: R${OriginClient.Account.Balance}");
+
+                
                 
             }
 

@@ -34,6 +34,20 @@ namespace AdaCredit
 
         }
 
+        public static void FailedTransactions()
+        {
+            FileManager file = new FileManager(2);
+            var pathList = file.GetFilePaths();
+            var nameList = file.GetFileNames();
+            for (int i = 0; i < pathList.Count; i++)
+            {
+                Transactions = file.TransactionReader<Transaction>(pathList[i]);
+                System.Console.WriteLine($"{pathList[i]}");
+                System.Console.WriteLine($"Showing failed transactions from {nameList[i]}");
+                Start();
+            }
+        }
+
         public static bool CheckAccounts(Transaction tr)
         {
 

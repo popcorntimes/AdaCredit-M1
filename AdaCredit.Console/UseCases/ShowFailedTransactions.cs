@@ -10,7 +10,8 @@ namespace AdaCredit.Console.UseCases
     {
         public static void Execute()
         {
-
+            TransactionRepository.FailedTransactions();
+            System.Console.ReadKey();
 
 
         }
